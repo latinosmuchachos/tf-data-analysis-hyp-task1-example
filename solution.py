@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-from scipy.stats import norm
-from statsmodels.stats.proportion import proportions_ztest
+from scipy import stats
 
 
 chat_id = 649103283 # Ваш chat ID, не меняйте название переменной
