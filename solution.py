@@ -10,10 +10,9 @@ def solution(x_success: int,
              x_cnt: int, 
              y_success: int, 
              y_cnt: int) -> bool:
-    alpha = 0.03
-    z_stat, p_value = proportions_ztest([x_success, y_success], [x_cnt, y_cnt], value=0, alternative='smaller')
-    z_crit = np.abs(norm.ppf(alpha))
-    if z_stat < -z_crit:
-        return True
-    else:
-        return False
+    p1 = x_success / x_cnt
+    p2 = y_success / y_cnt
+    p = (x_success + y_success) / (x_cnt + y_cnt)
+    z_stat = (p1 - p2) / np.sqrt(p * (1 - p) * ((1 / x_cnt) + (1 / y_cnt)))
+    p_value = stats.norm.sf(abs(z_stat)) * 2
+    return p_value < 0.03
